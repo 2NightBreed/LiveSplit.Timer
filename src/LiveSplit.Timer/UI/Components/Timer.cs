@@ -345,7 +345,15 @@ public class Timer : IComponent
         {
             if (state.Run.Last().Comparisons[state.CurrentComparison][timingMethod] == null || state.CurrentTime[timingMethod] < state.Run.Last().Comparisons[state.CurrentComparison][timingMethod])
             {
-                TimerColor = state.LayoutSettings.PersonalBestColor;
+                Color color = state.LayoutSettings.PersonalBestColor;
+                if (state.LayoutSettings.UseRainbowColor)
+                {
+                    int hue = (int)DateTime.Now.TimeOfDay.TotalMilliseconds / 100 % 36 * 10;
+                    Color rainbowColor = ColorExtensions.FromHSV(hue, 1, 1);
+                    color = Color.FromArgb(((rainbowColor.R * 2) + (255 * 1)) / 3, ((rainbowColor.G * 2) + (255 * 1)) / 3, ((rainbowColor.B * 2) + (255 * 1)) / 3);
+                }
+
+                TimerColor = color;
             }
             else
             {
