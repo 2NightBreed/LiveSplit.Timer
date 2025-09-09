@@ -346,7 +346,14 @@ public class Timer : IComponent
         {
             if (state.Run.Last().Comparisons[state.CurrentComparison][timingMethod] == null || state.CurrentTime[timingMethod] < state.Run.Last().Comparisons[state.CurrentComparison][timingMethod])
             {
-                TimerColor = state.LayoutSettings.PersonalBestColor;
+                if (state.LayoutSettings.ShowBestSegments && LiveSplitStateHelper.CheckBestSegment(state, state.CurrentSplitIndex - 1, timingMethod))
+                {
+                    TimerColor = LiveSplitStateHelper.GetBestSegmentColor(state);
+                }
+                else
+                {
+                    TimerColor = state.LayoutSettings.PersonalBestColor;
+                }
             }
             else
             {
