@@ -312,9 +312,21 @@ public class Timer : IComponent
         }
         else if (state.CurrentPhase == TimerPhase.Ended)
         {
-            TimerColor = state.Run[^1].Comparisons[state.CurrentComparison][timingMethod] == null || state.CurrentTime[timingMethod] < state.Run[^1].Comparisons[state.CurrentComparison][timingMethod]
-                ? state.LayoutSettings.PersonalBestColor
-                : state.LayoutSettings.BehindLosingTimeColor;
+            if (state.Run[^1].Comparisons[state.CurrentComparison][timingMethod] == null || state.CurrentTime[timingMethod] < state.Run[^1].Comparisons[state.CurrentComparison][timingMethod])
+            {
+                if (state.LayoutSettings.ShowBestSegments)
+                {
+                    TimerColor = LiveSplitStateHelper.GetBestSegmentColor(state);
+                }
+                else
+                {
+                    TimerColor = state.LayoutSettings.PersonalBestColor;
+                }
+            }
+            else
+            {
+                TimerColor = state.LayoutSettings.BehindLosingTimeColor;
+            }
         }
         else if (state.CurrentPhase == TimerPhase.Running)
         {
