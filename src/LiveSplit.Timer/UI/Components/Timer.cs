@@ -281,6 +281,11 @@ public class Timer : IComponent
             timeValue = GetTime(state, TimingMethod.RealTime);
         }
 
+        if (timeValue is { } time && time < TimeSpan.Zero)
+        {
+            Formatter.Accuracy = TimeAccuracy.Milliseconds;
+        }
+
         if (timeValue != null)
         {
             string timeString = Formatter.Format(timeValue);
