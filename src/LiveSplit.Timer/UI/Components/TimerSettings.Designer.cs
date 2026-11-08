@@ -53,6 +53,7 @@
             this.lblIconSize = new System.Windows.Forms.Label();
             this.trkIconSize = new System.Windows.Forms.TrackBar();
             this.chkLastSubsplitIcons = new System.Windows.Forms.CheckBox();
+            this.chkGrayscaleLastSplitIcon = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkSize)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -89,6 +90,7 @@
             this.tableLayoutPanel1.Controls.Add(this.lblIconSize, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.trkIconSize, 1, 9);
             this.tableLayoutPanel1.Controls.Add(this.chkLastSubsplitIcons, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.chkGrayscaleLastSplitIcon, 4, 8);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(7, 7);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -408,6 +410,18 @@
             this.chkLastSubsplitIcons.Text = "Last Subsplit Icons";
             this.chkLastSubsplitIcons.UseVisualStyleBackColor = true;
             // 
+            // chkGrayscaleLastSplitIcon
+            // 
+            this.chkGrayscaleLastSplitIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkGrayscaleLastSplitIcon.AutoSize = true;
+            this.chkGrayscaleLastSplitIcon.Location = new System.Drawing.Point(317, 292);
+            this.chkGrayscaleLastSplitIcon.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.chkGrayscaleLastSplitIcon.Name = "chkGrayscaleLastSplitIcon";
+            this.chkGrayscaleLastSplitIcon.Size = new System.Drawing.Size(142, 17);
+            this.chkGrayscaleLastSplitIcon.TabIndex = 50;
+            this.chkGrayscaleLastSplitIcon.Text = "Grayscale Icon";
+            this.chkGrayscaleLastSplitIcon.UseVisualStyleBackColor = true;
+            // 
             // TimerSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -456,5 +470,6 @@
         private System.Windows.Forms.Label lblIconSize;
         private System.Windows.Forms.TrackBar trkIconSize;
         private System.Windows.Forms.CheckBox chkLastSubsplitIcons;
+        private System.Windows.Forms.CheckBox chkGrayscaleLastSplitIcon;
     }
 }

@@ -17,6 +17,7 @@ public partial class TimerSettings : UserControl
     public float DecimalsSize { get; set; }
     public bool DisplayIcon { get; set; }
     public bool LastSubsplitIcons { get; set; }
+    public bool GrayscaleLastSplitIcon { get; set; }
     public float IconSize { get; set; }
 
     private string timerFormat
@@ -79,6 +80,7 @@ public partial class TimerSettings : UserControl
         DecimalsSize = 35f;
         DisplayIcon = false;
         LastSubsplitIcons = false;
+        GrayscaleLastSplitIcon = false;
         IconSize = 24f;
 
         btnTimerColor.DataBindings.Add("BackColor", this, "TimerColor", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -92,6 +94,7 @@ public partial class TimerSettings : UserControl
         trkDecimalsSize.DataBindings.Add("Value", this, "DecimalsSize", false, DataSourceUpdateMode.OnPropertyChanged);
         chkDisplayIcon.DataBindings.Add("Checked", this, "DisplayIcon", false, DataSourceUpdateMode.OnPropertyChanged);
         chkLastSubsplitIcons.DataBindings.Add("Checked", this, "LastSubsplitIcons", false, DataSourceUpdateMode.OnPropertyChanged);
+        chkGrayscaleLastSplitIcon.DataBindings.Add("Checked", this, "GrayscaleLastSplitIcon", false, DataSourceUpdateMode.OnPropertyChanged);
         trkIconSize.DataBindings.Add("Value", this, "IconSize", false, DataSourceUpdateMode.OnPropertyChanged);
         cmbDigitsFormat.DataBindings.Add("SelectedItem", this, "DigitsFormat", false, DataSourceUpdateMode.OnPropertyChanged);
         cmbAccuracy.DataBindings.Add("SelectedItem", this, "Accuracy", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -183,6 +186,7 @@ public partial class TimerSettings : UserControl
         DecimalsSize = SettingsHelper.ParseFloat(element["DecimalsSize"], 35f);
         DisplayIcon = SettingsHelper.ParseBool(element["DisplayIcon"], false);
         LastSubsplitIcons = SettingsHelper.ParseBool(element["LastSubsplitIcons"], false);
+        GrayscaleLastSplitIcon = SettingsHelper.ParseBool(element["GrayscaleLastSplitIcon"], false);
         IconSize = SettingsHelper.ParseFloat(element["IconSize"], 24f);
         BackgroundColor = SettingsHelper.ParseColor(element["BackgroundColor"], Color.Transparent);
         BackgroundColor2 = SettingsHelper.ParseColor(element["BackgroundColor2"], Color.Transparent);
@@ -248,6 +252,7 @@ public partial class TimerSettings : UserControl
         SettingsHelper.CreateSetting(document, parent, "DecimalsSize", DecimalsSize) ^
         SettingsHelper.CreateSetting(document, parent, "DisplayIcon", DisplayIcon) ^
         SettingsHelper.CreateSetting(document, parent, "LastSubsplitIcons", LastSubsplitIcons) ^
+        SettingsHelper.CreateSetting(document, parent, "GrayscaleLastSplitIcon", GrayscaleLastSplitIcon) ^
         SettingsHelper.CreateSetting(document, parent, "IconSize", IconSize);
     }
 
@@ -258,6 +263,6 @@ public partial class TimerSettings : UserControl
 
     private void chkDisplayIcon_CheckedChanged(object sender, EventArgs e)
     {
-        lblIconSize.Enabled = trkIconSize.Enabled = chkLastSubsplitIcons.Enabled = chkDisplayIcon.Checked;
+        lblIconSize.Enabled = trkIconSize.Enabled = chkLastSubsplitIcons.Enabled = chkGrayscaleLastSplitIcon.Enabled = chkDisplayIcon.Checked;
     }
 }

@@ -132,19 +132,20 @@ public class Timer : IComponent
         IconWidth = Settings.DisplayIcon ? (int)(originalDrawSize + 7.5f) : 0;
 
         int splitIndex = state.CurrentSplitIndex < 1 ? 0 : state.CurrentSplitIndex + lastSplitOffset;
-        Image icon = null;
+        Image splitIcon = null;
         if (state.CurrentPhase != TimerPhase.NotRunning)
         {
             if (Settings.LastSubsplitIcons)
             {
-                icon = state.Run[splitIndex].IsLastSubSplit ? state.Run[splitIndex].LastSubsplitIcon : state.Run[splitIndex].Icon;
+                splitIcon = state.Run[splitIndex].IsLastSubSplit ? state.Run[splitIndex].LastSubsplitIcon : state.Run[splitIndex].Icon;
             }
             else
             {
-                icon = state.Run[splitIndex].Icon;
+                splitIcon = state.Run[splitIndex].Icon;
             }
         }
 
+        Image icon = Settings.GrayscaleLastSplitIcon && state.CurrentPhase == TimerPhase.Ended ? LiveSplitStateHelper.ConvertImageToGrayscale(splitIcon) : splitIcon;
         if (Settings.DisplayIcon && icon != null)
         {
             if (OldImage != icon)
