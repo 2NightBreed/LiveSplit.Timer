@@ -15,6 +15,8 @@ public partial class TimerSettings : UserControl
     public float TimerWidth { get; set; }
 
     public float DecimalsSize { get; set; }
+    public bool DisplayIcon { get; set; }
+    public float IconSize { get; set; }
 
     private string timerFormat
     {
@@ -74,6 +76,8 @@ public partial class TimerSettings : UserControl
         CenterTimer = false;
         TimingMethod = "Current Timing Method";
         DecimalsSize = 35f;
+        DisplayIcon = false;
+        IconSize = 24f;
 
         btnTimerColor.DataBindings.Add("BackColor", this, "TimerColor", false, DataSourceUpdateMode.OnPropertyChanged);
         chkOverrideTimerColors.DataBindings.Add("Checked", this, "OverrideSplitColors", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -84,6 +88,8 @@ public partial class TimerSettings : UserControl
         chkCenterTimer.DataBindings.Add("Checked", this, "CenterTimer", false, DataSourceUpdateMode.OnPropertyChanged);
         cmbTimingMethod.DataBindings.Add("SelectedItem", this, "TimingMethod", false, DataSourceUpdateMode.OnPropertyChanged);
         trkDecimalsSize.DataBindings.Add("Value", this, "DecimalsSize", false, DataSourceUpdateMode.OnPropertyChanged);
+        chkDisplayIcon.DataBindings.Add("Checked", this, "DisplayIcon", false, DataSourceUpdateMode.OnPropertyChanged);
+        trkIconSize.DataBindings.Add("Value", this, "IconSize", false, DataSourceUpdateMode.OnPropertyChanged);
         cmbDigitsFormat.DataBindings.Add("SelectedItem", this, "DigitsFormat", false, DataSourceUpdateMode.OnPropertyChanged);
         cmbAccuracy.DataBindings.Add("SelectedItem", this, "Accuracy", false, DataSourceUpdateMode.OnPropertyChanged);
     }
@@ -172,6 +178,8 @@ public partial class TimerSettings : UserControl
         ShowGradient = SettingsHelper.ParseBool(element["ShowGradient"], true);
         TimerColor = SettingsHelper.ParseColor(element["TimerColor"], Color.FromArgb(170, 170, 170));
         DecimalsSize = SettingsHelper.ParseFloat(element["DecimalsSize"], 35f);
+        DisplayIcon = SettingsHelper.ParseBool(element["DisplayIcon"], false);
+        IconSize = SettingsHelper.ParseFloat(element["IconSize"], 24f);
         BackgroundColor = SettingsHelper.ParseColor(element["BackgroundColor"], Color.Transparent);
         BackgroundColor2 = SettingsHelper.ParseColor(element["BackgroundColor2"], Color.Transparent);
         BackgroundGradient = SettingsHelper.ParseEnum(element["BackgroundGradient"], DeltasGradientType.Plain);
@@ -233,11 +241,18 @@ public partial class TimerSettings : UserControl
         SettingsHelper.CreateSetting(document, parent, "BackgroundGradient", BackgroundGradient) ^
         SettingsHelper.CreateSetting(document, parent, "CenterTimer", CenterTimer) ^
         SettingsHelper.CreateSetting(document, parent, "TimingMethod", TimingMethod) ^
-        SettingsHelper.CreateSetting(document, parent, "DecimalsSize", DecimalsSize);
+        SettingsHelper.CreateSetting(document, parent, "DecimalsSize", DecimalsSize) ^
+        SettingsHelper.CreateSetting(document, parent, "DisplayIcon", DisplayIcon) ^
+        SettingsHelper.CreateSetting(document, parent, "IconSize", IconSize);
     }
 
     private void ColorButtonClick(object sender, EventArgs e)
     {
         SettingsHelper.ColorButtonClick((Button)sender, this);
+    }
+
+    private void chkDisplayIcon_CheckedChanged(object sender, EventArgs e)
+    {
+        lblIconSize.Enabled = trkIconSize.Enabled = chkDisplayIcon.Checked;
     }
 }

@@ -24,6 +24,11 @@ public class Timer : IComponent
 
     public GraphicsCache Cache { get; set; }
 
+    protected int IconWidth { get; set; }
+
+    public Image ShadowImage { get; set; }
+    protected Image OldImage { get; set; }
+
     public TimerSettings Settings { get; set; }
     public float ActualWidth { get; set; }
 
@@ -74,6 +79,7 @@ public class Timer : IComponent
             NullFormat = NullFormat.ZeroWithAccuracy,
             DigitsFormat = DigitsFormat.SingleDigitSeconds
         };
+        IconWidth = 0;
         Settings = new TimerSettings();
         UpdateTimeFormat();
         Cache = new GraphicsCache();
@@ -116,10 +122,47 @@ public class Timer : IComponent
         }
     }
 
-    private void DrawGeneral(Graphics g, LiveSplitState state, float width, float height)
+    private void DrawGeneral(Graphics g, LiveSplitState state, float width, float height, bool drawIcon = false)
     {
         DrawBackground(g, TimerColor, Settings.BackgroundColor, Settings.BackgroundColor2, width, height, Settings.BackgroundGradient);
 
+        int lastSplitOffset = state.CurrentSplitIndex == state.Run.Count ? -1 : 0;
+
+        float originalDrawSize = Math.Min(Settings.IconSize, width - 14);
+        IconWidth = Settings.DisplayIcon ? (int)(originalDrawSize + 7.5f) : 0;
+
+        Image icon = state.CurrentSplitIndex >= 0 ? state.Run[state.CurrentSplitIndex + lastSplitOffset].Icon : null;
+        if (Settings.DisplayIcon && icon != null)
+        {
+            if (OldImage != icon)
+            {
+                ImageAnimator.Animate(icon, (s, o) => { });
+                OldImage = icon;
+            }
+
+            float drawWidth = originalDrawSize;
+            float drawHeight = originalDrawSize;
+            if (icon.Width > icon.Height)
+            {
+                float ratio = icon.Height / (float)icon.Width;
+                drawHeight *= ratio;
+            }
+            else
+            {
+                float ratio = icon.Width / (float)icon.Height;
+                drawWidth *= ratio;
+            }
+
+            ImageAnimator.UpdateFrames(icon);
+
+            g.DrawImage(
+                icon,
+                7 + ((originalDrawSize - drawWidth) / 2),
+                ((height - originalDrawSize) / 2.0f) + ((originalDrawSize - drawHeight) / 2),
+                drawWidth,
+                drawHeight);
+        }
+        
         if (state.LayoutSettings.TimerFont != TimerFont || Settings.DecimalsSize != PreviousDecimalsSize)
         {
             TimerFont = state.LayoutSettings.TimerFont;
@@ -136,16 +179,18 @@ public class Timer : IComponent
         Matrix oldMatrix = g.Transform;
         float unscaledWidth = Math.Max(10, BigMeasureLabel.ActualWidth + SmallTextLabel.ActualWidth + 11);
         float unscaledHeight = 45f;
-        float widthFactor = (width - 14) / (unscaledWidth - 14);
+        float iconOffset = Math.Max(0, IconWidth - 7);
+        float availableWidth = Math.Max(0, width - 14 - iconOffset);
+        float widthFactor = availableWidth / (unscaledWidth - 14);
         float heightFactor = height / unscaledHeight;
         float adjustValue = !Settings.CenterTimer ? 7f : 0f;
         float scale = Math.Min(widthFactor, heightFactor);
         g.TranslateTransform(width - adjustValue, height / 2);
         g.ScaleTransform(scale, scale);
         g.TranslateTransform(-unscaledWidth + adjustValue, -0.5f * unscaledHeight);
-        if (Settings.CenterTimer)
+        if (Settings.CenterTimer && scale > 0)
         {
-            g.TranslateTransform(-(width - (unscaledWidth * scale)) / 2f / scale, 0);
+            g.TranslateTransform(-(width - iconOffset - (unscaledWidth * scale)) / 2f / scale, 0);
         }
 
         DrawUnscaled(g, state, unscaledWidth, unscaledHeight);
@@ -234,12 +279,12 @@ public class Timer : IComponent
 
     public void DrawVertical(Graphics g, LiveSplitState state, float width, Region clipRegion)
     {
-        DrawGeneral(g, state, width, VerticalHeight);
+        DrawGeneral(g, state, width, VerticalHeight, Settings.DisplayIcon);
     }
 
     public void DrawHorizontal(Graphics g, LiveSplitState state, float height, Region clipRegion)
     {
-        DrawGeneral(g, state, HorizontalWidth, height);
+        DrawGeneral(g, state, HorizontalWidth, height, Settings.DisplayIcon);
     }
 
     public Control GetSettingsControl(LayoutMode mode)

@@ -49,11 +49,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.trkDecimalsSize = new System.Windows.Forms.TrackBar();
             this.cmbGradientType = new System.Windows.Forms.ComboBox();
+            this.chkDisplayIcon = new System.Windows.Forms.CheckBox();
+            this.lblIconSize = new System.Windows.Forms.Label();
+            this.trkIconSize = new System.Windows.Forms.TrackBar();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkSize)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkDecimalsSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkIconSize)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -80,10 +84,13 @@
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.trkDecimalsSize, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.cmbGradientType, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.chkDisplayIcon, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lblIconSize, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.trkIconSize, 1, 9);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(7, 7);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 8;
+            this.tableLayoutPanel1.RowCount = 10;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
@@ -92,8 +99,9 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(462, 287);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(462, 346);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // cmbAccuracy
@@ -331,7 +339,7 @@
             this.trkDecimalsSize.Maximum = 50;
             this.trkDecimalsSize.Minimum = 10;
             this.trkDecimalsSize.Name = "trkDecimalsSize";
-            this.trkDecimalsSize.Size = new System.Drawing.Size(299, 24);
+            this.trkDecimalsSize.Size = new System.Drawing.Size(299, 23);
             this.trkDecimalsSize.TabIndex = 9;
             this.trkDecimalsSize.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trkDecimalsSize.Value = 10;
@@ -349,6 +357,42 @@
             this.cmbGradientType.SelectedIndexChanged += new System.EventHandler(this.cmbGradientType_SelectedIndexChanged);
             this.cmbGradientType.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.cmbGradientType_Format);
             // 
+            // chkDisplayIcon
+            // 
+            this.chkDisplayIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkDisplayIcon.AutoSize = true;
+            this.chkDisplayIcon.Location = new System.Drawing.Point(7, 292);
+            this.chkDisplayIcon.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.chkDisplayIcon.Name = "chkDisplayIcon";
+            this.chkDisplayIcon.Size = new System.Drawing.Size(147, 17);
+            this.chkDisplayIcon.TabIndex = 46;
+            this.chkDisplayIcon.Text = "Display Icon";
+            this.chkDisplayIcon.UseVisualStyleBackColor = true;
+            this.chkDisplayIcon.CheckedChanged += new System.EventHandler(this.chkDisplayIcon_CheckedChanged);
+            // 
+            // lblIconSize
+            // 
+            this.lblIconSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblIconSize.AutoSize = true;
+            this.lblIconSize.Location = new System.Drawing.Point(3, 324);
+            this.lblIconSize.Name = "lblIconSize";
+            this.lblIconSize.Size = new System.Drawing.Size(151, 13);
+            this.lblIconSize.TabIndex = 47;
+            this.lblIconSize.Text = "Icon Size";
+            // 
+            // trkIconSize
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.trkIconSize, 4);
+            this.trkIconSize.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trkIconSize.Location = new System.Drawing.Point(160, 318);
+            this.trkIconSize.Maximum = 100;
+            this.trkIconSize.Minimum = 10;
+            this.trkIconSize.Name = "trkIconSize";
+            this.trkIconSize.Size = new System.Drawing.Size(299, 25);
+            this.trkIconSize.TabIndex = 48;
+            this.trkIconSize.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trkIconSize.Value = 10;
+            // 
             // TimerSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -356,7 +400,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "TimerSettings";
             this.Padding = new System.Windows.Forms.Padding(7);
-            this.Size = new System.Drawing.Size(476, 301);
+            this.Size = new System.Drawing.Size(476, 360);
             this.Load += new System.EventHandler(this.TimerSettings_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -365,6 +409,7 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkDecimalsSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkIconSize)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -392,5 +437,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TrackBar trkDecimalsSize;
         private System.Windows.Forms.ComboBox cmbAccuracy;
+        private System.Windows.Forms.CheckBox chkDisplayIcon;
+        private System.Windows.Forms.Label lblIconSize;
+        private System.Windows.Forms.TrackBar trkIconSize;
     }
 }
