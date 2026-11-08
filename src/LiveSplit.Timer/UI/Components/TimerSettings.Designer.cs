@@ -52,6 +52,7 @@
             this.chkDisplayIcon = new System.Windows.Forms.CheckBox();
             this.lblIconSize = new System.Windows.Forms.Label();
             this.trkIconSize = new System.Windows.Forms.TrackBar();
+            this.chkLastSubsplitIcons = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkSize)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -87,6 +88,7 @@
             this.tableLayoutPanel1.Controls.Add(this.chkDisplayIcon, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.lblIconSize, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.trkIconSize, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.chkLastSubsplitIcons, 1, 8);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(7, 7);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -393,6 +395,19 @@
             this.trkIconSize.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trkIconSize.Value = 10;
             // 
+            // chkLastSubsplitIcons
+            // 
+            this.chkLastSubsplitIcons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkLastSubsplitIcons.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.chkLastSubsplitIcons, 3);
+            this.chkLastSubsplitIcons.Location = new System.Drawing.Point(164, 292);
+            this.chkLastSubsplitIcons.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.chkLastSubsplitIcons.Name = "chkLastSubsplitIcons";
+            this.chkLastSubsplitIcons.Size = new System.Drawing.Size(143, 17);
+            this.chkLastSubsplitIcons.TabIndex = 49;
+            this.chkLastSubsplitIcons.Text = "Last Subsplit Icons";
+            this.chkLastSubsplitIcons.UseVisualStyleBackColor = true;
+            // 
             // TimerSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -440,5 +455,6 @@
         private System.Windows.Forms.CheckBox chkDisplayIcon;
         private System.Windows.Forms.Label lblIconSize;
         private System.Windows.Forms.TrackBar trkIconSize;
+        private System.Windows.Forms.CheckBox chkLastSubsplitIcons;
     }
 }

@@ -131,7 +131,20 @@ public class Timer : IComponent
         float originalDrawSize = Math.Min(Settings.IconSize, width - 14);
         IconWidth = Settings.DisplayIcon ? (int)(originalDrawSize + 7.5f) : 0;
 
-        Image icon = state.CurrentSplitIndex >= 0 ? state.Run[state.CurrentSplitIndex + lastSplitOffset].Icon : null;
+        int splitIndex = state.CurrentSplitIndex < 1 ? 0 : state.CurrentSplitIndex + lastSplitOffset;
+        Image icon = null;
+        if (state.CurrentPhase != TimerPhase.NotRunning)
+        {
+            if (Settings.LastSubsplitIcons)
+            {
+                icon = state.Run[splitIndex].IsLastSubSplit ? state.Run[splitIndex].LastSubsplitIcon : state.Run[splitIndex].Icon;
+            }
+            else
+            {
+                icon = state.Run[splitIndex].Icon;
+            }
+        }
+
         if (Settings.DisplayIcon && icon != null)
         {
             if (OldImage != icon)
